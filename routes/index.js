@@ -8,7 +8,7 @@ var fs = require('fs');
 /* GET partials for angular routeProvider pages. */
 router.get('/views/:folder/partials/:file', function(req, res, next) {   
     console.log(process.env.ROOT_DIR);
-    res.set('Content-Type', 'text/html').sendFile(path.join(process.env.ROOT_DIR + '/views/' + req.params.folder + '/partials/' + req.params.file + '.html'));
+    res.set('Content-Type', 'text/html').sendFile('/views/' + req.params.folder + '/partials/' + req.params.file + '.html',  { root: process.env.ROOT_DIR });
 });
 
 module.exports = router;
