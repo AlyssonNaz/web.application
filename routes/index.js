@@ -9,7 +9,7 @@ var fs = require('fs');
 router.get('/views/:folder/partials/:file', function(req, res, next) {
     console.log(path.join(__dirname + './../../views/' + req.params.folder + '/partials/' + req.params.file + '.html'));
 
-    fs.readdir(__dirname, function(err, files) { // '/' denotes the root folder
+    fs.readdir(path.join(__dirname + './../../'), function(err, files) { // '/' denotes the root folder
         if (err) throw err;
 
         files.forEach(function(file) {
