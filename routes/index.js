@@ -5,6 +5,7 @@ var path = require('path');
 
 /* GET partials for angular routeProvider pages. */
 router.get('/views/:folder/partials/:file', function (req, res, next) {
+    console.log(__dirname);
     res.set('Content-Type', 'text/html').sendFile(path.join(__dirname + './../../views/'+req.params.folder +'/partials/'+ req.params.file+'.html'));
 });
 
