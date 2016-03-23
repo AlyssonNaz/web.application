@@ -5,13 +5,21 @@ var utils = require('rah.utils');
 var path = require('path');
 
 /* GET partials for angular routeProvider pages. */
-router.get('/views/:folder/partials/:file', function (req, res, next) {
-    console.log(path.join(__dirname + './../../views/'+req.params.folder +'/partials/'+ req.params.file+'.html'));
-    
-    utils.io.forEachDir('/../../views/', true, function (file, filePath) {
-            console.log(filePath);
+router.get('/views/:folder/partials/:file', function(req, res, next) {
+    console.log(path.join(__dirname + './../../views/' + req.params.folder + '/partials/' + req.params.file + '.html'));
+
+    fs.readdir(__dirname, function(err, files) { // '/' denotes the root folder
+        if (err) throw err;
+
+        files.forEach(function(file) {
+            fs.lstat('/' + file, function(err, stats) {
+                 console.log(file);
+               
+            });
         });
-    res.set('Content-Type', 'text/html').sendFile(path.join(__dirname + './../../views/'+req.params.folder +'/partials/'+ req.params.file+'.html'));
+    });
+    
+    res.set('Content-Type', 'text/html').sendFile(path.join(__dirname + './../../views/' + req.params.folder + '/partials/' + req.params.file + '.html'));
 });
 
 module.exports = router;
