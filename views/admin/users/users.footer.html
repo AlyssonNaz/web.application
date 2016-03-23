@@ -1,0 +1,22 @@
+<!-- DataTables -->
+<script src="/content/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/content/js/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+       var table = $('#userTable').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+        
+        $('#userTable').on('click', 'tbody tr', function(){
+           var row = table.row($(this));
+           window.location =  window.location + '/edit/'+row.data()[0];
+        });
+    });
+
+</script>

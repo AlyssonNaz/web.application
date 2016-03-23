@@ -2,10 +2,16 @@ var express = require('express');
 var router = express.Router();
 var db = require('rah.db');
 var auth = require('rah.auth');
-var path = require('path');
+var utils = require('rah.utils');
+
 
 router.get('/', auth.cookie, function (req, res, next) {
-    res.render('dashboard/index', {pageTitle: 'SeuGarçom! | Painel de Administração', view: 'partials/main.html'});
+    utils.templates.dashboard(res, {
+        view: 'main',
+        root: 'dashboard',
+        header: 'main.header',
+        title: 'Painel de Administração'
+    })
 });
 
 module.exports = router;

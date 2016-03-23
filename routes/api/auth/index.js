@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('rah.db');
-var TAuth = require('rah.modules/auth');
+var TUser = require('rah.modules')('user');
 
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
 router.post('/', function (req, res, next) {
@@ -9,7 +9,7 @@ router.post('/', function (req, res, next) {
         return res.status(400).json({ message: 'Please fill out all fields' });
     }
 
-    TAuth.login(
+    TUser.authenticate(
         {
             username: req.body.username,
             password: req.body.password
@@ -21,9 +21,9 @@ router.post('/', function (req, res, next) {
         });
 });
 
-//gera um cadastro com token para um novo usuário
+//cria um novo usuário com token
 router.post('/register', function (req, res, next) {
-    TAuth.register(
+    TUser.create(
         {
             username: req.body.username,
             email: req.body.email,

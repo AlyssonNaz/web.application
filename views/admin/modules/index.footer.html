@@ -1,0 +1,7 @@
+<script>
+    $(document).ready(function(){
+        $('#table').on('click', 'tbody tr', function(){
+           window.location =  window.location + '/edit/'+$(this).data('id');
+        }); 
+    });
+</script>

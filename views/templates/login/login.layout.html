@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="seugarcom">
+<head>
+    <% include login.header.html %>
+
+    <!-- iCheck-->
+    <script src="/content/js/plugins/iCheck/icheck.min.js"></script>
+    <link rel="stylesheet" href="/content/js/plugins/iCheck/square/blue.css">
+    
+    <!-- PageController -->
+    <script src="/controllers/authController.js"></script>
+    <script src="/factory/authFactory.js"></script>
+    
+
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"></a>Seu<b>Garçom!</b></div>
+
+        <div ng-view></div>
+    </div>
+
+    <!-- Bootstrap 3.3.5-->
+    <script src="/content/js/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

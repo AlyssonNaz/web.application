@@ -8,5 +8,4 @@ router.get('/views/:folder/partials/:file', function (req, res, next) {
     res.set('Content-Type', 'text/html').sendFile(path.join(__dirname + '../../views/'+req.params.folder +'/partials/'+ req.params.file+'.html'));
 });
 
-
 module.exports = router;

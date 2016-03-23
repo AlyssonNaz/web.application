@@ -1,0 +1,41 @@
+<div class="row">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="userTable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="hidden"></th>
+                            <th>Nome de Usuário</th>
+                            <th>E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.users.forEach(function(user) { %>
+                            <p>
+                                <a href="#">
+                                    <tr>
+                                        <td class="hidden">
+                                            <%= user.id %>
+                                        </td>
+                                        <td>
+                                            <%= user.username %>
+                                        </td>
+                                        <td>
+                                            <%= user.email %>
+                                        </td>
+                                    </tr>
+                                </a>
+                            </p>
+                            <% }); %>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

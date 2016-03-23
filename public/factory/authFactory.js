@@ -11,6 +11,7 @@
 
         auth.getToken = function () {
             return $window.localStorage['x-access-token'];
+            // return $cookies.get('x-access-token');
         }
 
         auth.logOut = function () {
@@ -20,7 +21,6 @@
 
         auth.isLoggedIn = function () {
             var token = auth.getToken();
-
             if (token) {
                 var payload = JSON.parse($window.atob(token.split('.')[1]));
 

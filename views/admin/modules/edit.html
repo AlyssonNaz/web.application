@@ -1,0 +1,125 @@
+<div class="row" ng-controller="rah.modules">
+     <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Rotas <small>(<%= data.module.routes %>)</small></h3>
+                <button class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Adicionar</button>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped" id="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 30px">Método</th>
+                            <th>Url</th>
+                            <th>Autenticação</th>
+                            <th>Status</th>
+                        </tr>
+                        <% data.routes.forEach(function(route) { %>
+
+                            <tr>
+
+                                <td>
+                                    <%= route.method %>
+                                </td>
+                                <td>
+                                    <%= route.url %>
+                                </td>
+                                <td>
+                                    <%= route.auth %>
+                                </td>
+                                <td>
+                                    <%if (route.state === 'pending') { %>
+                                        <span class="label label-warning">Pendente</span>
+                                        <% } else { %>
+                                            <span class="label label-success">Ativo</span>
+                                            <% } %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Views</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped" id="table">
+                    <tbody>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Path</th>
+                            <th>Ações</th>
+                        </tr>
+                        <% data.views.forEach(function(view) { %>
+
+                            <tr>
+
+                                <td>
+                                    <%= view.name %>
+                                </td>
+                                <td>
+                                    <%= view.path %>
+                                </td>
+                                <td>
+                                    <a ng-click="loadView(<%= view.id %>)" class="btn btn-xs btn-info">Editar</a>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div ng-modal class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Nova Rota</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Método</label>
+                                <select class="form-control" ng-model="route.method">
+                                    <option value="get" selected>GET</option>
+                                    <option value="post">POST</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="text" class="form-control" placeholder="Rota" ng-model="route.url">
+                            </div>
+                            <div class="form-group">
+                                <label>Autenticação</label>
+                                <select class="form-control" ng-model="route.auth">
+                                    <option value="auth.cookie">Cookies</option>
+                                    <option value="auth.req">Requisição</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" ng-click="createRoute()">Salvar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

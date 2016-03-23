@@ -22,6 +22,7 @@
     "pg-hstore": "^2.3.2",
     "q": "^1.4.1",
     "sequelize": "^3.14.2",
+    "sequelize-cache": "0.0.1",
     "serve-favicon": "~2.3.0"
   }
 }
