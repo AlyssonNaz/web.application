@@ -7,19 +7,19 @@ var TUser = require('rah.modules')('user');
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
 router.post('/', function(req, res, next) {
     console.log(req.body);
-    var data = crypto.decrypt(req.body);    
+    var data = crypto.decrypt(req.body.data);    
     console.log(data);
 
-    if (!req.body.username)
+    if (!data.username)
         return res.status(400).json({ error: 'Usuário não informado.', body: req.body });
 
-    if (!req.body.password)
+    if (!data.password)
         return res.status(400).json({ error: 'Senha não informada.' });
         
     TUser.authenticate(
         {
-            username: req.body.username,
-            password: req.body.password
+            username: data.username,
+            password: data.password
         }
     ).then(function(token) {
         return res.json({ token });
