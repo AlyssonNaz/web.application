@@ -6,7 +6,7 @@ var TUser = require('rah.modules')('user');
 
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
 router.post('/', function(req, res, next) {
-    console.log(req.body.data);
+    // console.log(req.body.data);
     var data = crypto.decrypt(req.body.data);    
     console.log(data);
 
