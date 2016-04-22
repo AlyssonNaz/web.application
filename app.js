@@ -46,7 +46,8 @@ routes.default(app);
 app.use(function (req, res, next) {
     if (!req.body.crypto) {
         console.log('teste');
-        res.header("Access-Control-Allow-Origin", "https://seugarcom.herokuapp.com");
+        res.setHeader("Access-Control-Allow-Origin", "https://seugarcom.herokuapp.com");
+        console.log('teste');
         //res.header("Access-Control-Allow-Headers", "X-Requested-With");
     }
     next();
