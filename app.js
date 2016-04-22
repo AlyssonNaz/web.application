@@ -32,19 +32,6 @@ app.use('/admin/modules/js', express.static(path.join(__dirname, '/views/admin/m
 // load automatic custom routes
 routes.default(app);
 
-app.use(function (req, res, next) {
-    //if (!req.body.crypto) {
-        console.log('teste');
-        res.header("Access-Control-Allow-Origin", "https://seugarcom.herokuapp.com");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-        res.header("Access-Control-Allow-Credentials", "true");
-        console.log('teste3');
-    //}
-    console.log('teste4');
-    next();
-});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
