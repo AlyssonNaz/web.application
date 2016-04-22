@@ -42,6 +42,15 @@ app.use('/admin/modules/js', express.static(path.join(__dirname, '/views/admin/m
 routes.default(app);
 // routes.api(app);
 
+//crypto routes
+app.user(function (req, res, next) {
+    if (!req.body.crypto) {
+        res.header("Access-Control-Allow-Origin", "https://seugarcom.herokuapp.com");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    }
+    next();
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
