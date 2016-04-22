@@ -46,7 +46,7 @@ routes.default(app);
 app.use(function (req, res, next) {
     if (!req.body.crypto) {
         res.header("Access-Control-Allow-Origin", "https://seugarcom.herokuapp.com");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        //res.header("Access-Control-Allow-Headers", "X-Requested-With");
     }
     next();
 });
