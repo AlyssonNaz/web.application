@@ -8,17 +8,16 @@ var TUser = require('rah.modules')('user');
 
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
 router.post('/', auth.crypto, function (req, res, next) {
-    Login(req.body.username, req.body.password);
-    res.end();
+    return Login(res, req.body.username, req.body.password);
 });
 
 //cria um novo usuário com token
 router.post('/register', auth.crypto, function (req, res, next) {    
-    Register(req.body.email, req.body.username, req.body.password);
+    Register(res, req.body.email, req.body.username, req.body.password);
 });
 
 //MARK: Methods
-function Login(username, password) {
+function Login(res, username, password) {
     if (!username)
         return res.status(400).json({ error: 'Usuário não informado.'});
 
@@ -37,7 +36,7 @@ function Login(username, password) {
     });    
 }
 
-function Register(email, username, password) {
+function Register(res, email, username, password) {
     TUser.create(
         {
             username: username,
