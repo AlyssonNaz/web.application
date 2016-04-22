@@ -8,7 +8,7 @@ var cors = require('cors');
 
 var corsOptionsDelegate = function(req, callback){
   var corsOptions;
-  corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response  
+  corsOptions = { origin: false }; // reflect (enable) the requested origin in the CORS response  
   callback(null, corsOptions); // callback expects two parameters: error and options
 };
 
