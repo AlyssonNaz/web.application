@@ -3,11 +3,18 @@ var router = express.Router();
 var db = require('rah.db');
 var auth = require('rah.auth');
 var TUser = require('rah.modules')('user');
-
+var cors = require('cors');
 //MARK: Routes
 
+var corsOptionsDelegate = function(req, callback){
+  var corsOptions;
+  corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response  
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+
+
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
-router.post('/', auth.crypto, function (req, res, next) {
+router.post('/', cors(corsOptionsDelegate), function (req, res, next) {
     return Login(res, req.body.username, req.body.password);
 });
 
