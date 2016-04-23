@@ -29,8 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin/modules/js', express.static(path.join(__dirname, '/views/admin/modules/js')));
 
-
-
 // load automatic custom routes
 routes.default(app);
 
