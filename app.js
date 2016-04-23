@@ -24,6 +24,7 @@ app.set('view engine', 'html');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 var allowCrossDomain = function(req, res, next) {
+    consle.log('tste');
     res.header('Access-Control-Allow-Origin', 'https://seugarcom.herokuapp.com');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
