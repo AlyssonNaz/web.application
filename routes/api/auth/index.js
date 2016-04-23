@@ -3,18 +3,14 @@ var router = express.Router();
 var db = require('rah.db');
 var auth = require('rah.auth');
 var TUser = require('rah.modules')('user');
-var cors = require('cors');
+
 //MARK: Routes
 
-var corsOptionsDelegate = function(req, callback){
-  var corsOptions;
-  corsOptions = { origin: false }; // reflect (enable) the requested origin in the CORS response  
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
-
-
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
-router.post('/', cors(corsOptionsDelegate), function (req, res, next) {
+router.post('/', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'https://seugarcom.herokuapp.com');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     return Login(res, req.body.username, req.body.password);
 });
 
