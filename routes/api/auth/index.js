@@ -7,10 +7,8 @@ var TUser = require('rah.modules')('user');
 //MARK: Routes
 
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
-router.post('/', function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'https://seugarcom.herokuapp.com');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+router.post('/', auth.crypto, function (req, res, next) {
+    console.log(req.session);
     return Login(res, req.body.username, req.body.password);
 });
 
