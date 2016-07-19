@@ -6,11 +6,11 @@
             $routeProvider
                 .when('/auth/login', {
                     controller: 'rah.auth',
-                    templateUrl: '/views/auth/partials/login'
+                    templateUrl: '../views/auth/partials/login'
                 })
                 .when('/auth/register', {
                     controller: 'rah.auth',
-                    templateUrl: '/views/auth/partials/register'
+                    templateUrl: '../views/auth/partials/register'
                 })
 
                 .otherwise({ redirectTo: '/auth/login' });

@@ -102,7 +102,8 @@ var QueryGenerator = {
       , attribute = Utils._.template('<%= key %> <%= definition %>')({
         key: this.quoteIdentifier(key),
         definition: this.attributeToSQL(dataType, {
-          context: 'addColumn'
+          context: 'addColumn',
+          foreignKey: key
         })
       });
 
@@ -121,19 +122,38 @@ var QueryGenerator = {
   },
 
   changeColumnQuery: function(tableName, attributes) {
-    var query = 'ALTER TABLE <%= tableName %> CHANGE <%= attributes %>;';
-    var attrString = [];
+    var query = 'ALTER TABLE <%= tableName %> <%= query %>;';
+    var attrString = [], constraintString = [];
 
-    for (var attrName in attributes) {
-      var definition = attributes[attrName];
-
-      attrString.push(Utils._.template('`<%= attrName %>` `<%= attrName %>` <%= definition %>')({
-        attrName: attrName,
-        definition: definition
-      }));
+    for (var attributeName in attributes) {
+      var definition = attributes[attributeName];
+      if (definition.match(/REFERENCES/)) {
+        constraintString.push(Utils._.template('<%= fkName %> FOREIGN KEY (<%= attrName %>) <%= definition %>')({
+          fkName: this.quoteIdentifier(attributeName + '_foreign_idx'),
+          attrName: this.quoteIdentifier(attributeName),
+          definition: definition.replace(/.+?(?=REFERENCES)/,'')
+        }));
+      } else {
+        attrString.push(Utils._.template('`<%= attrName %>` `<%= attrName %>` <%= definition %>')({
+          attrName: attributeName,
+          definition: definition
+        }));
+      }
     }
 
-    return Utils._.template(query)({ tableName: this.quoteTable(tableName), attributes: attrString.join(', ') });
+    var finalQuery = '';
+    if (attrString.length) {
+      finalQuery += 'CHANGE ' + attrString.join(', ');
+      finalQuery += constraintString.length ? ' ' : '';
+    }
+    if (constraintString.length) {
+      finalQuery += 'ADD CONSTRAINT ' + constraintString.join(', ');
+    }
+
+    return Utils._.template(query)({
+      tableName: this.quoteTable(tableName),
+      query: finalQuery
+    });
   },
 
   renameColumnQuery: function(tableName, attrBefore, attributes) {
@@ -210,7 +230,7 @@ var QueryGenerator = {
     return Utils._.template(sql)({ tableName: this.quoteIdentifiers(tableName), indexName: indexName });
   },
 
-  attributeToSQL: function(attribute) {
+  attributeToSQL: function(attribute, options) {
     if (!Utils._.isPlainObject(attribute)) {
       attribute = {
         type: attribute
@@ -246,6 +266,16 @@ var QueryGenerator = {
 
     if (attribute.references) {
       attribute = Utils.formatReferences(attribute);
+
+      if (options && options.context === 'addColumn' && options.foreignKey) {
+        var attrName = options.foreignKey;
+
+        template += Utils._.template(', ADD CONSTRAINT <%= fkName %> FOREIGN KEY (<%= attrName %>)')({
+          fkName: this.quoteIdentifier(attrName + '_foreign_idx'),
+          attrName: this.quoteIdentifier(attrName)
+        });
+      }
+
       template += ' REFERENCES ' + this.quoteTable(attribute.references.model);
 
       if (attribute.references.key) {
@@ -313,6 +343,29 @@ var QueryGenerator = {
   },
 
   /**
+   * Generates an SQL query that returns the foreign key constraint of a given column.
+   *
+   * @param  {String} tableName  The name of the table.
+   * @param  {String} columnName The name of the column.
+   * @return {String}            The generated sql query.
+   */
+  getForeignKeyQuery: function(table, columnName) {
+    var tableName = table.tableName || table;
+    if (table.schema) {
+        tableName = table.schema + '.' + tableName;
+    }
+    return [
+      'SELECT CONSTRAINT_NAME as constraint_name',
+      'FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE',
+      'WHERE (REFERENCED_TABLE_NAME = ' + wrapSingleQuote(tableName),
+        'AND REFERENCED_COLUMN_NAME = ' + wrapSingleQuote(columnName),
+        ') OR (TABLE_NAME = ' + wrapSingleQuote(tableName),
+        'AND COLUMN_NAME = ' + wrapSingleQuote(columnName),
+        ')',
+    ].join(' ');
+  },
+
+  /**
    * Generates an SQL query that removes a foreign key from a table.
    *
    * @param  {String} tableName  The name of the table.
@@ -323,5 +376,10 @@ var QueryGenerator = {
     return 'ALTER TABLE ' + this.quoteTable(tableName) + ' DROP FOREIGN KEY ' + this.quoteIdentifier(foreignKey) + ';';
   }
 };
+
+// private methods
+function wrapSingleQuote(identifier){
+  return Utils.addTicks(identifier, '\'');
+}
 
 module.exports = Utils._.extend(Utils._.clone(require('../abstract/query-generator')), QueryGenerator);

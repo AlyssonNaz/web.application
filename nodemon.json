@@ -1,4 +1,7 @@
 {
   "verbose": true,
-  "ignore": ["routes/*"]
+  "ignore": [
+    "routes/*",
+    "views/*"
+  ]
 }

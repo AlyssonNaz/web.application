@@ -6,10 +6,12 @@ var utils = require('rah.utils');
 var routes = require('rah.routes');
 var exec = require('child_process').exec;
 
+var TModule = require('rah.modules')('module');
+
 var list;
 var modules = function () {
     if (!list) {
-        list = utils.list.create(db, 'modules')
+        list = utils.list.create(db, 'module')
     }
     return list;
 }
@@ -30,9 +32,36 @@ router.get('/', auth.cookie, function (req, res, next) {
     })
 });
 
+router.get('/new', auth.cookie, function (req, res, next) {
+    utils.templates.dashboard(res, {
+        view: 'new',
+        root: 'admin/modules',
+        header: 'new.header',
+        title: 'Novo Módulo'
+    })
+});
+
+
+router.post('/new', auth.cookie, function (req, res, next) {
+    TModule.create(
+        {
+            name: req.body.name,
+            desc: req.body.desc,
+            data: req.body.data
+        }).then(function (result) {
+            return res.json({ result });
+        }, function (err) {
+            return res.status(401).json(err);
+        });
+});
+
 router.get('/edit/:id', auth.cookie, function (req, res, next) {
-    modules().get(req.params.id).then(function (result) {
-        utils.templates.dashboard(res, {
+    modules().get(req.params.id, { include: [db.model('module')]}).then(function (result) {
+        result.getOther().then(function(parent){
+            console.log(parent);
+        })
+
+         utils.templates.dashboard(res, {
             view: 'edit',
             root: 'admin/modules',
             header: 'edit.header',
@@ -50,7 +79,7 @@ router.get('/edit/:id', auth.cookie, function (req, res, next) {
 
 });
 
-router.post('/edit/:id/create', function (req, res, next) {
+router.post('/edit/:id/create', auth.req, function (req, res, next) {
     // process.kill(process.pid, 'SIGUSR2');
     modules().get(req.params.id).then(function (result) {
         routes.create(result.routes, { method: req.body.method, url: req.body.url, auth: req.body.auth }).then(function (route) {
