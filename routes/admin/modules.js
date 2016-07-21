@@ -56,10 +56,10 @@ router.post('/new', auth.cookie, function (req, res, next) {
 });
 
 router.get('/edit/:id', auth.cookie, function (req, res, next) {
-    modules().get(req.params.id, { include: [db.model('module')]}).then(function (result) {
-        result.getOther().then(function(parent){
-            console.log(parent);
-        })
+    modules().get(req.params.id, { include: [{model: db.model('module'), as: 'Parent'}]}).then(function (result) {
+        //result.getSubitems().then(function(parent){
+        //    console.log(parent);
+        //})
 
          utils.templates.dashboard(res, {
             view: 'edit',
