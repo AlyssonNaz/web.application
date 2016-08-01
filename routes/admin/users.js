@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('rah.auth');
-var TUser = require('rah.modules')('user');
-var utils = require('rah.utils');
+var auth = requireCore('rah.auth');
+var TUser = requireCore('rah.modules')('user');
+var utils = requireCore('rah.utils');
 
 /* GET users page. */
 router.get('/', auth.cookie, function (req, res, next) {

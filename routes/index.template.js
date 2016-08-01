@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('rah.auth');
-var utils = require('rah.utils');
+var auth = requireCore('rah.auth');
+var utils = requireCore('rah.utils');
 
 /* Rota sem autenticação */
 router.get('*', function (req, res, next) {

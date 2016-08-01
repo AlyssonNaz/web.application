@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var db = require('rah.db');
-var utils = require('rah.utils');
+var db = requireCore('rah.db');
+var utils = requireCore('rah.utils');
 
 /* GET login page. */
 router.get('/*', function (req, res, next) {

@@ -1,0 +1,33 @@
+{
+  "name": "angularjs-lazy-loading-with-requirejs",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ifyio/angularjs-lazy-loading-with-requirejs",
+  "authors": [
+    "Ifeanyi Isitor <ify.iyo@gmail.com>"
+  ],
+  "description": "A demonstration of lazy loading in AngularJS using Asynchronous Module Definitions with RequireJS.",
+  "main": "./dist/angular-mustard.js",
+  "keywords": [
+    "Lazy",
+    "Loading",
+    "AngularJS"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.0",
+    "angular-route": "~1.2.14",
+    "jquery": "~2.1.0",
+    "requirejs": "~2.1.11"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.0"
+  }
+}

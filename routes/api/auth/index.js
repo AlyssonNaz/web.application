@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var db = require('rah.db');
-var auth = require('rah.auth');
-var TUser = require('rah.modules')('user');
+var db = requireCore('rah.db');
+var auth = requireCore('rah.auth');
+var TUser = requireCore('rah.modules')('user');
 
 //MARK: Routes
 

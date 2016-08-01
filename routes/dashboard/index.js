@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var db = require('rah.db');
-var auth = require('rah.auth');
-var utils = require('rah.utils');
+var db = requireCore('rah.db');
+var auth = requireCore('rah.auth');
+var utils = requireCore('rah.utils');
 
 
 router.get('/', auth.cookie, function (req, res, next) {

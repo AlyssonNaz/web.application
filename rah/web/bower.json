@@ -1,0 +1,21 @@
+{
+  "name": "2Bar",
+  "version": "1.0.0",
+  "homepage": "http://2bar.com.br",
+  "authors": [
+    "Alysson Guimarães <alysson.guimaraes@2bar.com.br>"
+  ],
+  "description": "2Bar App.",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "vendor"
+  ],
+  "dependencies": {
+    "angular": "~1.2.0",
+    "angular-route": "~1.2.14",
+    "jquery": "~2.1.0",
+    "requirejs": "~2.1.11"
+  }
+}

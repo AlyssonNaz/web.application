@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('rah.db');
+var db = requireCore('rah.db');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {

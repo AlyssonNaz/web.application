@@ -4,16 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var routes = require('./routes/index');
 var fs = require('fs');
 var engine = require('ejs');
 
-//my custom uses
-var db = require('rah.db')
-var routes = require('rah.routes')
-var utils = require('rah.utils')
+var core = require('rah.core');
+core.config();
 
 var app = express();
+
+//my custom uses
+var db = requireCore('rah.db');
+var routes = requireCore('rah.routes');
+var utils = requireCore('rah.utils');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,7 +29,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/admin/modules/js', express.static(path.join(__dirname, '/views/admin/modules/js')));
+
+/* Configurações NOVAS */
+app.use(express.static(path.join(__dirname, '/rah/web')));
+// app.use('/images/', express.static(path.join(__dirname, '/rah/web/images')));
+// app.use('/scripts/', express.static(path.join(__dirname, '/rah/web/scripts')));
+// app.use('/styles/', express.static(path.join(__dirname, '/rah/web/styles')));
+// app.use('/vendor/', express.static(path.join(__dirname, '/rah/web/vendor')));
 
 // load automatic custom routes
 routes.default(app);

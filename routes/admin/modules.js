@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var db = require('rah.db');
-var auth = require('rah.auth');
-var utils = require('rah.utils');
-var routes = require('rah.routes');
+var db = requireCore('rah.db');
+var auth = requireCore('rah.auth');
+var utils = requireCore('rah.utils');
+var routes = requireCore('rah.routes');
 var exec = require('child_process').exec;
 
-var TModule = require('rah.modules')('module');
+var TModule = requireCore('rah.modules')('module');
 
 var list;
 var modules = function () {
