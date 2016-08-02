@@ -21,15 +21,13 @@ define(['routes','services/dependencyResolverFor'], function(config, dependencyR
 
             $locationProvider.html5Mode(true);
 
-            $routeProvider.when('/teste/:teste', { 
-
-                    templateUrl: function(params){
-                        return '/core/' + params.teste + '.html'; 
-                    },
-                    resolve: dependencyResolverFor(['core/controllers/AboutViewController', 'directives/app-color'])
+ 
+            $routeProvider.when('/:module/:view', { 
+                    templateUrl: dependencyResolverFor.templateUrl,
+                    resolve: dependencyResolverFor.dependencies()
             });
 
-            $routeProvider.otherwise({ redirectTo: '/teste/start'});
+            $routeProvider.otherwise({ redirectTo: '/dashboard/'});
         }
     ]);
 
