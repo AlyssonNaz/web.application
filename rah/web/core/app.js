@@ -27,7 +27,7 @@ define(['routes','services/dependencyResolverFor'], function(config, dependencyR
                     resolve: dependencyResolverFor.dependencies()
             });
 
-            $routeProvider.otherwise({ redirectTo: '/dashboard/'});
+            $routeProvider.otherwise({ redirectTo: '/dashboard/start'});
         }
     ]);
 

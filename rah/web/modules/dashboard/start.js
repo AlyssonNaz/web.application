@@ -8,7 +8,7 @@ define(['app'], function(app)
         {
             $scope.page =
             {
-                heading: 'About Us'
+                heading: 'About Udddddasdfasdfasss'
             };
         }
     ]);
