@@ -6,6 +6,7 @@ define(['app'], function(app)
 
         function($scope)
         {
+            console.log('testando controller');
             $scope.page =
             {
                 heading: 'About Udddddasdfasdfasss'

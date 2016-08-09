@@ -5,13 +5,17 @@ require.config({
 		'angular-route': '/vendor/angular-route/angular-route',
 		'bootstrap': '../lib/bootstrap/js/bootstrap.min',
 		'jquery': '/vendor/jquery/dist/jquery',
-		'luna': '/vendor/luna/luna'
+		'luna': '/vendor/luna/luna',
+		'angular-route-segment': '/vendor/angular-route-segment/build/angular-route-segment'
     },
 	shim: {
 		'app': {
-			deps: ['angular', 'angular-route', 'luna']
+			deps: ['angular', 'angular-route', 'angular-route-segment', 'luna']
 		},
 		'angular-route': {
+			deps: ['angular']
+		},
+		'angular-route-segment': {
 			deps: ['angular']
 		},
 		'bootstrap': {
