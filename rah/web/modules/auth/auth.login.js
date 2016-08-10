@@ -1,17 +1,19 @@
 define([
     'app',
-    'directives/rah.dynamic.controller'
 ], function(app)
 {
     app.controller('LoginController',
     [
         '$scope',
+        '$location',
         'auth',
 
-        function($scope, auth)
+        function($scope, $location, auth)
         {            
-            $scope.longIn = function() {
-                auth.logIn($scope.user);
+            $scope.logIn = function() {
+                auth.logIn($scope.user).then(function(){
+                     $location.path( "/dashboard/start" );
+                });
             }
         }
     ]);

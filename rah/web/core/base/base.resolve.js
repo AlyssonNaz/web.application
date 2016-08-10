@@ -5,16 +5,18 @@ define([], function () {
     }
 
     return {
+        buildModule: buildPath,
         templateUrl: function (params) {
-            return buildPath(params.module, params.view) + '.html';
+            return '/modules/base/main.html';
+            // return buildPath(params.module, params.view) + '.html';
         },
         dependencies: function () {
             var definition =
                 {
                     resolver: ['$q', '$rootScope', '$route', function ($q, $rootScope, $route) {
-                        $rootScope.teste = "aaaaa";
+
                         var deferred = $q.defer();
-                        require([buildPath($route.current.params.module, $route.current.params.view+'.js')], function () {
+                        require(['/core/base/base.view.js', buildPath($route.current.params.module, $route.current.params.view+'.js')], function () {
                             $rootScope.$apply(function () {
                                 deferred.resolve();
                             });

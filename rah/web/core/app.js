@@ -1,7 +1,9 @@
-define(['routes',    
-    'services/dependencyResolverFor',
-    'services/rah.core.auth'],
-    function (config, dependencyResolverFor, app) {
+define([
+    'routes',    
+    'base/base.resolve',
+    'auth/auth'],
+
+    function (config, resolve, app) {
         
         // var app = angular.module('app', ['ngRoute', 'ui.router']);
 
@@ -24,8 +26,8 @@ define(['routes',
                     $locationProvider.html5Mode(true);
 
                     $routeProvider.when('/:module/:view', {
-                        templateUrl: dependencyResolverFor.templateUrl,
-                        resolve: dependencyResolverFor.dependencies()
+                        templateUrl: resolve.templateUrl,
+                        resolve: resolve.dependencies()
                     });
 
                     $routeProvider.otherwise({ redirectTo: '/dashboard/start' });
@@ -35,11 +37,10 @@ define(['routes',
         //inject any instance 
         app.run(function ($rootScope, $location, auth) {
             $rootScope.$on('$routeChangeStart', function (next, current) {
-                if (current.params.module == 'auth' && current.params.view != 'login')
-                    return;
-                    
                 if (!auth.isLoggedIn())
                     $location.path( "/auth/login" );
+                else if (current.params.module == 'auth')
+                    $location.path( "/dashboard/start" );
             });
         });
 
