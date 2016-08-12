@@ -7,7 +7,10 @@ define([], function () {
     return {
         buildModule: buildPath,
         templateUrl: function (params) {
-            return '/modules/base/base.view.html';
+            if (params.module == 'auth')
+                return '/modules/base/base.empty.view.html';
+            else 
+                return '/modules/base/base.view.html';
         },
         dependencies: function () {
             var definition =
