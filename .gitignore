@@ -1,7 +1,7 @@
 node_modules/
 rah/test/
 rah/web/vendor/
-!/rah/web/vendor/animate.css/*
+!/rah/web/vendor/animate.css/
 !/rah/web/vendor/bootstrap/
 !/rah/web/vendor/fontawesome/
 !/rah/web/vendor/jquery/
