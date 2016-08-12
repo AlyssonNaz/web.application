@@ -10,11 +10,10 @@ define([
                 member: '='
             },
             templateUrl: function(){
-                //return 'teste.html';
                 return resolve.buildModule($route.current.params.module, $route.current.params.view)+ '.html';
             },
             link: function (scope, element, attrs) {
-                $compile(element.contents())(scope)
+                //$compile(element.contents())(scope)
             }
         }
     })

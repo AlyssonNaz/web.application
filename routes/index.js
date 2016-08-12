@@ -5,7 +5,6 @@ var utils = requireCore('rah.utils');
 var path = require('path');
 var fs = require('fs');
 
-/* GET partials for angular routeProvider pages. */
 router.get('/core/:folder/:file', function(req, res, next) {   
     console.log(process.env.ROOT_DIR);
     res.set('Content-Type', 'text/html').sendFile('/web/core/' + req.params.folder + '/' + req.params.file,  { root: process.env.ROOT_DIR });

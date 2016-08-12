@@ -5,22 +5,20 @@
 
 $(document).ready(function () {
 
-
-
     // Handle minimalize left menu
-    $('.left-nav-toggle a').on('click', function(event){
+    $(document).on('click', '.left-nav-toggle a', function(event){
         event.preventDefault();
         $("body").toggleClass("nav-toggle");
     });
 
 
     // Hide all open sub nav menu list
-    $('.nav-second').on('show.bs.collapse', function () {
+    $(document).on('show.bs.collapse', '.nav-second', function () {
         $('.nav-second.in').collapse('hide');
     })
 
     // Handle panel toggle
-    $('.panel-toggle').on('click', function(event){
+    $(document).on('click', '.panel-toggle', function(event){
         event.preventDefault();
         var hpanel = $(event.target).closest('div.panel');
         var icon = $(event.target).closest('i');
@@ -39,7 +37,7 @@ $(document).ready(function () {
     });
 
     // Handle panel close
-    $('.panel-close').on('click', function(event){
+    $(document).on('click', '.panel-close', function(event){
         event.preventDefault();
         var hpanel = $(event.target).closest('div.panel');
         hpanel.remove();

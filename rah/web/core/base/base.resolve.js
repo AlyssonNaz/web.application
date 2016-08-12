@@ -7,8 +7,7 @@ define([], function () {
     return {
         buildModule: buildPath,
         templateUrl: function (params) {
-            return '/modules/base/main.html';
-            // return buildPath(params.module, params.view) + '.html';
+            return '/modules/base/base.view.html';
         },
         dependencies: function () {
             var definition =
