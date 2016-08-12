@@ -10,6 +10,11 @@ router.get('/core/:folder/:file', function(req, res, next) {
     res.set('Content-Type', 'text/html').sendFile('/web/core/' + req.params.folder + '/' + req.params.file,  { root: process.env.ROOT_DIR });
 });
 
+router.get('/modules/:folder/:file', function(req, res, next) {   
+    console.log(process.env.ROOT_DIR);
+    res.set('Content-Type', 'text/html').sendFile('/web/modules/' + req.params.folder + '/' + req.params.file,  { root: process.env.ROOT_DIR });
+});
+
 /* GET partials for angular routeProvider pages. */
 router.get('/*', function(req, res, next) {   
     //console.log(process.env.ROOT_DIR);

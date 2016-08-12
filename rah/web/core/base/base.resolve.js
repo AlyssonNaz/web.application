@@ -18,7 +18,11 @@ define([], function () {
                     resolver: ['$q', '$rootScope', '$route', function ($q, $rootScope, $route) {
 
                         var deferred = $q.defer();
-                        require(['/core/base/base.view.js', buildPath($route.current.params.module, $route.current.params.view+'.js')], function () {
+                        require([
+                            '/modules/base/base.view.js',
+                            '/modules/base/base.header.bar.view.js',
+                            '/modules/base/base.nav.bar.view.js',
+                            buildPath($route.current.params.module, $route.current.params.view+'.js')], function () {
                             $rootScope.$apply(function () {
                                 deferred.resolve();
                             });
