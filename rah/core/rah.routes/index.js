@@ -4,29 +4,31 @@ var fs = require('fs');
 var path = require('path');
 var readline = require('readline');
 
-var defaultRootApiFolder = 'api';
-var defaultRootRoutesFolder = 'routes';
+var defaultRootApiFolder = '/rah/api';
+var defaultRootRoutesFolder = '/rah/app';
 
 var modules = [];
 
 function loadRoute(route, app) {
-    utils.io.forEachDir(route, true, function (file, filePath) {
+    utils.io.forEachDir(process.env.ROOT_DIR + route, true, function (file, filePath) {
         var rt = path.parse(filePath);
-        var dir = rt.dir.replace('./routes', '');
+
+        //TODO: Utilizar rota dinâmica
+        var dir = rt.dir.replace('./rah/app', '').replace('./rah', '');
 
         if (rt.name == 'index.template')
             return;
 
         if (rt.name != 'index')
             dir += '/' + rt.name;
-
+            
         app.use(dir, require('../../../' + filePath));
 
-        var routePath = filePath.replace('./routes/', '');
+        //var routePath = filePath.replace('./'+defaultRootRoutesFolder+'/', '');
 
-        modules[routePath] = {};
-        modules[routePath].routes = parseRoute(routePath);
-        modules[routePath].views = parseViews(routePath);
+        //modules[routePath] = {};
+        //modules[routePath].routes = parseRoute(routePath);
+        //modules[routePath].views = parseViews(routePath);
 
         log.event('Success: .' + dir);
     });
@@ -40,7 +42,7 @@ function parseRoute(dir) {
         return [];
 
     var routes = [];
-    fs.readFileSync('./routes/' + dir).toString().split('\n').forEach(function (line) {
+    fs.readFileSync(dir).toString().split('\n').forEach(function (line) {
         var route = {};
 
         if (line.indexOf('router.') > -1) {
@@ -138,7 +140,8 @@ function parseViews(dir) {
 module.exports = {
     default: function (app) {
         log.event('Carregando Rotas...');
-        loadRoute('./' + defaultRootRoutesFolder, app);
+        loadRoute(defaultRootRoutesFolder, app);
+        loadRoute(defaultRootApiFolder, app);
     },
     parse: function (dir) {
         return parseRoute(dir);

@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin/modules/js', express.static(path.join(__dirname, '/views/admin/modules/js')));
+//app.use('/admin/modules/js', express.static(path.join(__dirname, '/views/admin/modules/js')));
 
 /* Configurações NOVAS */
 app.use(express.static(path.join(__dirname, '/rah/web')));
