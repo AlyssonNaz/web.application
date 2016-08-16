@@ -27,10 +27,6 @@ function addModel(file, Seq, sequelize) {
     Models[modelname] = sequelize.define(modelname, model.columns, model.options);
 
     Models[modelname].afterDefine = model.afterDefine;
-
-    if (modelname == 'module'){
-        //Models[modelname].hasMany(Models[modelname], { as: 'Subitems', foreignKey: 'parent'});
-    }
 }
 
 module.exports = {
