@@ -25,9 +25,7 @@ router.get('/modules/:folder/:file', function(req, res, next) {
     }); 
 });
 
-/* GET partials for angular routeProvider pages. */
 router.get('/*', function(req, res, next) {  
-    console.log('lalala');
     res.set('Content-Type', 'text/html').sendFile('/rah/web/modules/index.html',  { root: process.env.ROOT_DIR });
 });
 
