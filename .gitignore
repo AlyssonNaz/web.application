@@ -1,10 +1,1 @@
-node_modules/
-!node_modules/rah.core/
-rah/test/
-rah/web/vendor/
-!rah/web/vendor/animate.css/
-!rah/web/vendor/bootstrap/
-!rah/web/vendor/fontawesome/
-!rah/web/vendor/jquery/
-!rah/web/vendor/jquery-ui/
-!rah/web/vendor/pacejs/
+

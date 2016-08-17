@@ -1,0 +1,33 @@
+{
+  "name": "angularjs-lazy-loading-with-requirejs",
+  "version": "1.0.0",
+  "description": "A demonstration of lazy loading in AngularJS using Asynchronous Module Definitions with RequireJS.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifyio/angularjs-lazy-loading-with-requirejs.git"
+  },
+  "keywords": [
+    "Lazy",
+    "Loading",
+    "AngularJS"
+  ],
+  "author": "Ifeanyi Isitor (ifeanyiisitor@gmail.com)",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "express": "~3.2.0"
+  },
+  "devDependencies": {
+    "karma": "^0.12.0",
+    "requirejs": "^2.1.11",
+    "karma-requirejs": "^0.2.1",
+    "karma-jasmine": "^0.2.2",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-chrome-launcher": "^0.1.2",
+    "karma-phantomjs-launcher": "^0.1.2",
+    "phantomjs": "^1.9.7-1"
+  }
+}
