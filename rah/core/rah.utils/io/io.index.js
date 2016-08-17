@@ -12,6 +12,6 @@ function forEachDir(path, allowSubDir, callback) {
     });
 }
 
-module.exports = {
+module.exports = { 
     forEachDir
 }
