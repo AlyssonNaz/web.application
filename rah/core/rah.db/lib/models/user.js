@@ -62,6 +62,12 @@ module.exports.model = function (seq) {
                     }, settings.token.secret);
                 }
             }
+        },
+        afterDefine: function(Models){
+            this.metaData = { 
+                id: { caption: "ID", type: "int", readOnly: true},
+                email: { caption: "Email", type: "string", readOnly: false}
+            };
         }
     }
 }
