@@ -24,6 +24,7 @@ module.exports.model = function (seq) {
         },
         afterDefine: function(Models){
             this.belongsTo(this, { as: 'Parent', foreignKey: 'parent'});
+            
             this.metaData = { 
                 id: { caption: "ID", type: "int", readOnly: true},
                 name: { caption: "Nome do Módulo", type: "int", readOnly: false}
