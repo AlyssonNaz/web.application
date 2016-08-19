@@ -28,6 +28,9 @@ define([
                     $routeProvider.when('/:module/:view', {
                         templateUrl: resolve.templateUrl,
                         resolve: resolve.dependencies()
+                    }).when('/:module/:view/:id', {
+                        templateUrl: resolve.templateUrl,
+                        resolve: resolve.dependencies()
                     });
 
                     $routeProvider.otherwise({ redirectTo: '/dashboard/start' });
