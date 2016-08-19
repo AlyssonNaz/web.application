@@ -13,13 +13,15 @@ define([
             link: function ($scope, element) 
             {
                 $http.post('/api/model/'+$scope.model+'/list').success(function (data) {
-
                     //cria o cabeçalho da tabela
                     var $thead = $('<tr></tr>');
 
                     for (var column in data.metadata){
                          $thead.append('<th>'+ data.metadata[column].caption +'</th>');
                     }
+
+                    $thead.append('<th class="text-center">Ação</th>');
+                    
 
                     //cria as rows
                     var $tbody = $('<tbody></tbody>');
@@ -29,44 +31,27 @@ define([
                         for (var column in data.metadata){
                             $tr.append('<td>'+ data.itens[i][column] +'</td>');
                         }
+
+                        $tr.append('<td class="text-center"><a href="/admin/users/'+data.itens[i]['id']+'" class="btn btn-default btn-xs">Abrir</a></td>')
                         $tbody.append($tr);
                     }
 
-                    $table = $('<table></table>');
-                    $table.addClass('table table-hover table-striped');
+                    $table = $('<table style="font-size: 14px !important;"></table>');
+                    $table.addClass('table');
                     $table.append($('<thead></thead>').append($thead));
                     $table.append($tbody);
 
+                    var $panel = $('<div class="panel panel-filled"></div>');
+                    var $panelBody = $('<div class="panel-body"></div>');
+                    var $tableResponsive = $('<div class="table-responsive"></div>');
                     
-                    $(element).append($('<div class="table-responsive"></div>').append($table));
-                    //$scope.users = data.rows;
+                    $tableResponsive.append($table);
+                    $panelBody.append($tableResponsive);
+                    $panel.append($panelBody);
+
+                    $(element).empty();
+                    $(element).append($panel);
                 });
-//                   <table class="table table-striped">
-//     <thead>
-//       <tr>
-//         <th>Firstname</th>
-//         <th>Lastname</th>
-//         <th>Email</th>
-//       </tr>
-//     </thead>
-//     <tbody>
-//       <tr>
-//         <td>John</td>
-//         <td>Doe</td>
-//         <td>john@example.com</td>
-//       </tr>
-//       <tr>
-//         <td>Mary</td>
-//         <td>Moe</td>
-//         <td>mary@example.com</td>
-//       </tr>
-//       <tr>
-//         <td>July</td>
-//         <td>Dooley</td>
-//         <td>july@example.com</td>
-//       </tr>
-//     </tbody>
-//   </table>
             }
         }
     })

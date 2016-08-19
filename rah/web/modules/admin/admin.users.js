@@ -1,6 +1,7 @@
 define([
     'app',
-    '../base/table/table.view'
+    '../base/table/table.view',
+    '../base/header/header.view'
     ], function(app)
 {
     app.controller('UsersController',
@@ -10,9 +11,6 @@ define([
 
         function($scope, $http)
         {
-            // $http.post('/api/model/user/list').success(function (data) {
-            //     $scope.users = data.rows;
-            // });
         }
     ]);
 });

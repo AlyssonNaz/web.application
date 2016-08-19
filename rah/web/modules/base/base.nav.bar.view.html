@@ -1,18 +1,19 @@
     <!-- Navigation-->
     <aside class="navigation">
         <nav>
-            <ul class="nav luna-nav">
-                <li class="nav-category">
-                    Main
-                </li>
-                <li class="active">
-                    <a href="/dashboard/start">Start</a>
-                </li>
-                <li>
-                    <a href="/dashboard/report">Report</a>
-                </li>
+            <ul class="nav luna-nav" ng-repeat="menu in menus">
 
-                <li class="nav-info">
+                <li class="nav-category" >
+                    {{menu.name}}
+                </li>
+                <li ng-repeat="submenu in menu.menus">
+                    <a href="{{submenu.link}}">{{submenu.name}}</a>
+                </li>
+                <!--<li>
+                    <a href="/dashboard/report">Report</a>
+                </li>-->
+
+                <li ng-if="$last" class="nav-info">
                     <div class="m-t-xs">
                         <span class="c-white">Example</span> text.
                         <br/>

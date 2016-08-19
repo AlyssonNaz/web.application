@@ -9,8 +9,19 @@ define([
                 member: '='
             },
             templateUrl: '/modules/base/base.nav.bar.view.html',
-            link: function (scope, element, attrs) {
-                //$compile(element.contents())(scope)
+            link: function ($scope, element) {
+                $scope.menus = [
+                    {   
+                        name: 'Administração',
+                        menus: [
+                            { name: 'Usuários', link: '/admin/users' },
+                            // { name: 'AAA', link: '/admin/users' },
+                            // { name: 'Usuádfasdfadrios', link: '/admin/users' },
+                            // { name: 'Usufasdfários', link: '/admin/users' },
+                            // { name: 'asdfasdf', link: '/admin/users' }
+                        ]
+                    }                 
+                ];
             }
         }
     })
