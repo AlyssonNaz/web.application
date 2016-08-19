@@ -10,12 +10,12 @@ define([
                 title: '@',
                 desc: '@',
                 icon: '@',
-                ctrl: '='
+                options: '='
             },
             templateUrl: '/modules/base/header/header.view.html',
             link: function ($scope, element) 
             {
-             
+                    console.log($scope.options);
             }
         }
     })

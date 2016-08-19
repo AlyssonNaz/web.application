@@ -11,14 +11,10 @@ define([
 
         function($scope, $http)
         {
-            $scope.c = "this";
-
-            return {
-                testF: function (){
-                    console.log('blalalblalbalbla');
-                }
-            }
-            
+            $scope.headerOpt = {
+                "aaa": 'TTTT'
+            };
+        
         }
     ]);
 });
