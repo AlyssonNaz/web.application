@@ -11,6 +11,10 @@ define([
 
         function($scope, $http)
         {
+            $http.post('/api/model/user/1').then(function(data){
+                $scope.model = data.data
+            });
+
             $scope.headerOpt = {
                 "aaa": 'TTTT'
             };
