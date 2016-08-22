@@ -15,7 +15,8 @@ define([
             templateUrl: '/modules/base/header/header.view.html',
             link: function ($scope, element) 
             {
-                    console.log($scope.options);
+                element.parent().controller
+                    // console.log($scope.parent);
             }
         }
     })

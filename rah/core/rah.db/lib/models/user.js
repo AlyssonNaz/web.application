@@ -9,13 +9,14 @@ module.exports.model = function (seq) {
             //email do usuário
             email: { type: seq.STRING, unique: true, allowNull: false },
             //nome de usuário
-            username: { type: seq.STRING, unique: true, allowNull: false },
+            username: { type: seq.STRING, unique: true, allowNull: false},
             //salto da senha
-            passowrd_salt: { type: seq.STRING, allowNull: false },
+            passowrd_salt: { type: seq.STRING, allowNull: false, private: true },
             //campo de senha no formato hash
             password: {
                 type: seq.STRING,
                 allowNull: false,
+                private: true,
                 set: function (value) {
                     if (!value) 
                         throw 'Invalid password';

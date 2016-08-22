@@ -17,10 +17,10 @@ define([], function () {
                 {
                     resolver: ['$q', '$rootScope', '$route', function ($q, $rootScope, $route) {
                         var resolve = function(){
-                            if ($route.current.params.id && !isNaN($route.current.params.id)) 
+                            if ($route.current.params.id)// && !isNaN($route.current.params.id)) 
                                 return buildPath($route.current.params.module, $route.current.params.view+'.form.js');
 
-                            buildPath($route.current.params.module, $route.current.params.view+'.js');
+                            return buildPath($route.current.params.module, $route.current.params.view+'.js');
                         };
                         var deferred = $q.defer();
                         require([

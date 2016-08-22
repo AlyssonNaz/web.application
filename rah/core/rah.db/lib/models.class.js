@@ -8,5 +8,15 @@ module.exports = function (model) {
         classMethods = {};
     }
 
+    classMethods.publicFields = function(){
+        var result = [];
+        for (var col in this.tableAttributes)
+        {
+            if (!this.tableAttributes[col].private)
+                result.push(col);
+        }
+        return result;
+    }
+
     model.options.classMethods = classMethods;
 }
