@@ -1,19 +1,39 @@
-<div ng-controller="UsersController">
-    <rah-header title="Editar Usuário" desc="Última alteração em 19/08/2016 ás 18:00hs" icon="pe-7s-user" options="headerOpt"></rah-header>
-    <div class="col-xs-6">
-        <div class="panel panel-filled">
-            <div class="panel-body">
-                <form>
-                    <div class="form-group">
-                            <label>Usuário</label>
-                            <input type="text" ng-model="model.username" class="form-control" placeholder="Usuário">
+<div ng-controller="UsersFormController">
+    <div class="row">
+        <rah-header title="Editar Usuário" desc="Última alteração em 19/08/2016 ás 18:00hs" icon="pe-7s-user"></rah-header>
+
+        <div class="col-xs-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Usuário</label>
+                                <input type="text" ng-model="model.username" class="form-control" placeholder="Usuário">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" ng-model="model.email" class="form-control" placeholder="E-mail">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" ng-model="model.email" class="form-control" placeholder="E-mail">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Senha</label>
+                                <input type="password" ng-model="model.password" class="form-control" placeholder="Senha">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirmar senha</label>
+                                <input type="password" ng-model="model.confirm_password" class="form-control" placeholder="Senha">
+                            </div>
                         </div>
-                </form>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="isNew ? create() : save()" class="btn btn-w-md btn-accent pull-right">Salvar</button>
         </div>
     </div>
 </div>
