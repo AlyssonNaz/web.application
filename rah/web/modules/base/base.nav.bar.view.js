@@ -15,6 +15,7 @@ define([
                         name: 'Administração',
                         menus: [
                             { name: 'Usuários', link: '/admin/users' },
+                            { name: 'Bares', link: '/admin/bars' },
                             // { name: 'AAA', link: '/admin/users' },
                             // { name: 'Usuádfasdfadrios', link: '/admin/users' },
                             // { name: 'Usufasdfários', link: '/admin/users' },

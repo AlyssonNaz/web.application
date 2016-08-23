@@ -3,13 +3,16 @@
         <div ng-show="false" class="pull-right text-right" style="line-height: 14px">
             <small>Luna Admin Theme<br>Dashboard<br> <span class="c-white">v.1.0</span></small>
         </div>
+        <div ng-if="options.buttons" ng-repeat="btn in options.buttons" class="pull-right text-right" style="line-height: 14px">
+            <a href="{{btn.link}}" ng-click="btn.onClick()" class="btn btn-w-md btn-accent">{{btn.caption}}</a>
+        </div>
         <div class="header-icon">
-            <i class="pe page-header-icon {{icon ? icon : 'pe-7s-plugin'}}"></i>
+            <i class="pe page-header-icon {{options.icon ? options.icon : 'pe-7s-plugin'}}"></i>
         </div>
         <div class="header-title">
-            <h3 class="m-b-xs">{{title}}</h3>
-            <small ng-if="desc">
-                {{desc}}
+            <h3 class="m-b-xs">{{options.title}}</h3>
+            <small ng-if="options.description">
+                {{options.description}}
             </small>
         </div>
     </div>
