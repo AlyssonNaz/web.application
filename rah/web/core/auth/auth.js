@@ -17,15 +17,16 @@ define([], function()
 
         auth.logOut = function () {
             $window.localStorage.removeItem('x-access-token');
-            //$cookies.remove('x-access-token');
+            $http.defaults.headers.common['x-access-token'] = '';
         };
 
         auth.isLoggedIn = function () {
             var token = auth.getToken();
             if (token) {
-                var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-                return payload.exp > Date.now() / 1000;
+                $http.defaults.headers.common['x-access-token'] = token;
+                return true;
+                // var payload = JSON.parse($window.atob(token.split('.')[1]));
+                // return payload;
             } else {
                 return false;
             }
@@ -49,6 +50,7 @@ define([], function()
         auth.logIn = function (user) {
             return $http.post('/api/auth', user).success(function (data) {
                 auth.saveToken(data.token);
+                $http.defaults.headers.common['x-access-token'] = data.token;
             });
         };
 

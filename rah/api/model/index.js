@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var db = requireCore('rah.db');
-var TUser = requireCore('rah.modules')('user');
+var auth = requireCore('rah.auth');
 
-router.post('/:model/list', function (req, res, next) {
+router.post('/:model/list', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
     User.findAll().then(function (users) {
         res.json({ "metadata": User.metaData, "itens": users});
@@ -12,7 +12,7 @@ router.post('/:model/list', function (req, res, next) {
     });
 });
 
-router.post('/:model/:id', function (req, res, next) {
+router.post('/:model/:id', auth.req, function (req, res, next) {
     if(req.params.id == 'new')
         return next();
 
@@ -27,7 +27,7 @@ router.post('/:model/:id', function (req, res, next) {
     });
 });
 
-router.post('/:model/new', function (req, res, next) {
+router.post('/:model/new', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
     User.create(req.body).then(function (user) {
         res.json(user);
@@ -36,7 +36,7 @@ router.post('/:model/new', function (req, res, next) {
     });
 });
 
-router.put('/:model/:id', function (req, res, next) {
+router.put('/:model/:id', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
    User.update(req.body, { where: { id: req.params.id }}).then(function (users) {
         res.json(users);

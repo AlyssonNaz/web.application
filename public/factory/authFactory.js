@@ -17,6 +17,7 @@
         auth.logOut = function () {
             $window.localStorage.removeItem('x-access-token');
             $cookies.remove('x-access-token');
+            $http.defaults.headers.common['x-access-token'] = '';
         };
 
         auth.isLoggedIn = function () {
@@ -48,6 +49,7 @@
         auth.logIn = function (user) {
             return $http.post('/api/auth', user).success(function (data) {
                 auth.saveToken(data.token);
+                $http.defaults.headers.common['x-access-token'] = data.token;
             });
         };
 

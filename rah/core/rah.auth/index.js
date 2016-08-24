@@ -1,14 +1,15 @@
-var jwt = require('express-jwt');
+var jwtExpress = require('express-jwt');
+var jwt = require('jsonwebtoken');
 var settings = requireCore('rah.utils').settings;
 var crypto = requireCore('rah.utils').crypto;
 
 function createToken(data) {
-    var token = jwt.sign({ data }, settings.token.secret);
+    var token = jwt.sign({data: data}, settings.token.secret);
     return token;
 }
 
 function validToken(type, module) {
-    return jwt(
+    return jwtExpress(
         {
             secret: settings.token.secret,
             getToken: function (req) {
@@ -42,7 +43,17 @@ function validCrypto(req, res, next) {
 
 module.exports = {
     createToken: function (data) { return createToken(data); },
-    req: validToken('header'),
+    req: function (req, res, next) {
+        jwt.verify(req.headers['x-access-token'], settings.token.secret, function (err, decoded) {
+            if (err) {
+                return res.status(500).json({success: false, message: 'HAHAHA... Onde está sua autorização? hein?'});
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
+    },
     cookie: validToken('cookie'),
     crypto: validCrypto
 }

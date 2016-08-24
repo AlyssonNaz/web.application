@@ -1,6 +1,7 @@
 var settings = requireCore('rah.utils').settings;
 var auth = requireCore('rah.auth');
 var crypto = require('crypto');
+var cryptoCore = requireCore('rah.utils').crypto;
 var jwt = require('jsonwebtoken');
 
 module.exports.model = function (seq) {
@@ -52,15 +53,15 @@ module.exports.model = function (seq) {
                     var today = new Date();
                     var exp = new Date();
                     exp.setDate(today.getDate() + 60);
-                    
-                    //TODO Mudar para o classe auth
-                    return jwt.sign({
+
+                    var data = {
                         id: this.id,
                         username: this.username,
-                        //TODO Encryptar permissões e verificar elas ao realizar uma requisição no servidor
-                        permissions: this.permissions,
-                        exp: parseInt((exp.getTime() / 1000).toString()),
-                    }, settings.token.secret);
+                    }
+
+                    var encryptedData = cryptoCore.encrypt(JSON.stringify(data));
+
+                    return jwt.sign({rahSecure: encryptedData}, settings.token.secret);
                 }
             }
         },

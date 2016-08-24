@@ -30,7 +30,7 @@ function decodeFrom64(value) {
 }
 
 module.exports = {
-    encrypt,
-    decrypt
+    encrypt: encrypt,
+    decrypt: decrypt
 }
 

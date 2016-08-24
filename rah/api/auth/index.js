@@ -7,12 +7,12 @@ var TUser = requireCore('rah.modules')('user');
 //MARK: Routes
 
 //gera um token de autenticação para um usuário através do nome de usuário ou e-mail, e a senha
-router.post('/', auth.crypto, function (req, res, next) {
+router.post('/', function (req, res, next) {
     return Login(res, req.body.username, req.body.password);
 });
 
 //cria um novo usuário com token
-router.post('/register', auth.crypto, function (req, res, next) {    
+router.post('/register', function (req, res, next) {
     Register(res, req.body.email, req.body.username, req.body.password);
 });
 
@@ -45,7 +45,7 @@ function Register(res, email, username, password) {
         }).then(function (token) {
             return res.json({ token: token });
         }, function (err) {
-            return res.status(500).json(err);
+        return res.status(500).json(err);
         });
 }
 
