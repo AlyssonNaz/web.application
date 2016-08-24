@@ -19,10 +19,10 @@ router.post('/register', auth.crypto, function (req, res, next) {
 //MARK: Methods
 function Login(res, username, password) {
     if (!username)
-        return res.status(400).json({ error: 'Usuário não informado.'});
+        return res.status(500).json({ error: 'Usuário não informado.'});
 
     if (!password)
-        return res.status(400).json({ error: 'Senha não informada.' });
+        return res.status(500).json({ error: 'Senha não informada.' });
 
     TUser.authenticate(
         {
@@ -30,9 +30,9 @@ function Login(res, username, password) {
             password: password
         }
     ).then(function (token) {
-        return res.json({ token });
+        return res.json({ token: token });
     }, function (err) {
-        return res.status(401).json(err);
+        return res.status(500).json(err);
     });    
 }
 
@@ -43,9 +43,9 @@ function Register(res, email, username, password) {
             email: email,
             password: password
         }).then(function (token) {
-            return res.json({ token });
+            return res.json({ token: token });
         }, function (err) {
-            return res.status(401).json(err);
+            return res.status(500).json(err);
         });
 }
 
