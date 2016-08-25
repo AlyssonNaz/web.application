@@ -29,6 +29,10 @@ router.post('/:model/:id', auth.req, function (req, res, next) {
 
 router.post('/:model/new', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
+
+    if (User.beforeSave)
+        User.beforeSave(req.body);
+
     User.create(req.body).then(function (user) {
         res.json(user);
     }).catch(function (err) {
