@@ -14,15 +14,11 @@ define([
         {
             $scope.isNew = $route.current.params.id == 'new';
             
-            console.log($scope.isNew);
-
             if (!$scope.isNew) {
                 $http.post('/api/model/user/'+$route.current.params.id).then(function(data){
                     $scope.model = data.data
                 });
             }
-
-            
 
             $scope.create = function(){
                 $http.post('/api/model/user/new', $scope.model).then(function(data){
