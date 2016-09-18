@@ -12,6 +12,15 @@ router.post('/:model/list', auth.req, function (req, res, next) {
     });
 });
 
+router.post('/:model/info', auth.req, function (req, res, next) {
+    var model = db.model(req.params.model);
+    if (model)
+        res.json({"metadata": model.metaData});
+    else
+        res.status(404).json({err: "Ivalid model name"});
+
+});
+
 router.post('/:model/:id', auth.req, function (req, res, next) {
     if(req.params.id == 'new')
         return next();
@@ -40,6 +49,7 @@ router.post('/:model/new', auth.req, function (req, res, next) {
     });
 });
 
+
 router.put('/:model/:id', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
    User.update(req.body, { where: { id: req.params.id }}).then(function (users) {
@@ -48,7 +58,6 @@ router.put('/:model/:id', auth.req, function (req, res, next) {
         res.status(404).json(err)
     });
 });
-
 
 
 module.exports = router;
