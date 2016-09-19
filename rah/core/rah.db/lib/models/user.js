@@ -8,9 +8,9 @@ module.exports.model = function (seq) {
     return {
         columns: {
             //email do usuário
-            email: { type: seq.STRING, unique: true, allowNull: false },
+            email: {type: seq.STRING, unique: true, allowNull: false, caption: 'E-mail', readOnly: true},
             //nome de usuário
-            username: { type: seq.STRING, unique: true, allowNull: false},
+            username: {type: seq.STRING, unique: true, allowNull: false, caption: 'Usuário', readOnly: true},
             //salto da senha
             passowrd_salt: { type: seq.STRING, allowNull: false, private: true },
             //campo de senha no formato hash
@@ -64,12 +64,6 @@ module.exports.model = function (seq) {
                     return jwt.sign({rahSecure: encryptedData}, settings.token.secret);
                 }
             }
-        },
-        afterDefine: function(Models){
-            this.metaData = { 
-                id: { caption: "ID", type: "int", readOnly: true},
-                email: { caption: "Email", type: "string", readOnly: false}
-            };
         }
     }
 }

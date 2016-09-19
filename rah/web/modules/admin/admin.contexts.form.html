@@ -1,0 +1,28 @@
+<div ng-controller="ContextsFormController">
+    <div class="row">
+        <rah-header title="Editar Contexto" desc="Última alteração em 19/08/2016 ás 18:00hs"></rah-header>
+
+        <div class="col-xs-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.name" class="form-control"
+                                       placeholder="Nome do Contexto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="isNew ? create() : save()" class="btn btn-w-md btn-accent pull-right">
+                Salvar
+            </button>
+        </div>
+    </div>
+</div>

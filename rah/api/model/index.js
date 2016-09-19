@@ -6,7 +6,7 @@ var auth = requireCore('rah.auth');
 router.post('/:model/list', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
     User.findAll().then(function (users) {
-        res.json({ "metadata": User.metaData, "itens": users});
+        res.json({"metadata": User.metaData(), "itens": users});
     }).catch(function (err) {
         res.status(404).json(err)
     });
@@ -15,25 +15,10 @@ router.post('/:model/list', auth.req, function (req, res, next) {
 router.post('/:model/info', auth.req, function (req, res, next) {
     var model = db.model(req.params.model);
     if (model)
-        res.json({"metadata": model.metaData});
+        res.json({"metadata": model.metaData()});
     else
         res.status(404).json({err: "Ivalid model name"});
 
-});
-
-router.post('/:model/:id', auth.req, function (req, res, next) {
-    if(req.params.id == 'new')
-        return next();
-
-   var User = db.model(req.params.model);
-    User.findOne({ 
-        where: { id: req.params.id },
-        attributes: User.publicFields()
-     }).then(function (users) {
-        res.json(users);
-    }).catch(function (err) {
-        res.status(404).json(err)
-    });
 });
 
 router.post('/:model/new', auth.req, function (req, res, next) {
@@ -49,6 +34,17 @@ router.post('/:model/new', auth.req, function (req, res, next) {
     });
 });
 
+router.post('/:model/:id', auth.req, function (req, res, next) {
+    var User = db.model(req.params.model);
+    User.findOne({
+        where: {id: req.params.id},
+        attributes: User.publicFields() //não permite selecionar campos privados
+    }).then(function (users) {
+        res.json(users);
+    }).catch(function (err) {
+        res.status(404).json(err)
+    });
+});
 
 router.put('/:model/:id', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
