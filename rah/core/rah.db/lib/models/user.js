@@ -13,6 +13,14 @@ module.exports.model = function (seq) {
             username: {type: seq.STRING, unique: true, allowNull: false, caption: 'Usuário', readOnly: true},
             //salto da senha
             passowrd_salt: { type: seq.STRING, allowNull: false, private: true },
+            //módulo pai (se houver)
+            context_id: {
+                type: seq.UUID,
+                allowNull: false,
+                caption: "Contexto",
+                readOnly: false,
+                references: {model: 'tb_context', key: "id"}
+            },
             //campo de senha no formato hash
             password: {
                 type: seq.STRING,
@@ -57,6 +65,7 @@ module.exports.model = function (seq) {
                     var data = {
                         id: this.id,
                         username: this.username,
+                        context: this.context_id
                     }
 
                     var encryptedData = cryptoCore.encrypt(JSON.stringify(data));
@@ -64,6 +73,9 @@ module.exports.model = function (seq) {
                     return jwt.sign({rahSecure: encryptedData}, settings.token.secret);
                 }
             }
+        },
+        afterDefine: function (Models) {
+            this.belongsTo(Models['context'], {as: 'Contexto', foreignKey: 'context_id'});
         }
     }
 }

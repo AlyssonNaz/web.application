@@ -13,6 +13,9 @@ module.exports = function (model) {
         var info = {};
 
         for (var col in this.tableAttributes) {
+            if (this.tableAttributes[col].private)
+                continue;
+
             var column = this.tableAttributes[col];
             info[col] = {
                 caption: column.caption,

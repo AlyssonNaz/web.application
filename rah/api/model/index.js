@@ -5,7 +5,9 @@ var auth = requireCore('rah.auth');
 
 router.post('/:model/list', auth.req, function (req, res, next) {
    var User = db.model(req.params.model);
-    User.findAll().then(function (users) {
+    User.findAll({
+        attributes: User.publicFields()
+    }).then(function (users) {
         res.json({"metadata": User.metaData(), "itens": users});
     }).catch(function (err) {
         res.status(404).json(err)

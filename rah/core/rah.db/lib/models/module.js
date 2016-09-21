@@ -3,13 +3,19 @@ var settings = requireCore('rah.utils').settings;
 module.exports.model = function (seq) {
     return {
         columns: {
-            id: { type: seq.INTEGER, unique: true, allowNull: false, primaryKey: true },            
+            id: {type: seq.INTEGER, unique: true, allowNull: false, primaryKey: true, caption: "Id"},
             //nome do módulo
-            name: { type: seq.STRING, unique: true, allowNull: false },
+            name: {type: seq.STRING, unique: true, allowNull: false, caption: "Nome", readOnly: false},
             //decrição do módulo
-            desc: { type: seq.STRING, unique: true, allowNull: false },
+            desc: {type: seq.STRING, unique: true, allowNull: false, caption: "Descrição", readOnly: false},
             //módulo pai (se houver)
-            parent: { type: seq.INTEGER, allowNull: true, references: { model: 'tb_modules', key: "id" } },
+            parent: {
+                type: seq.INTEGER,
+                allowNull: true,
+                caption: "Módulo Pai",
+                readOnly: false,
+                references: {model: 'tb_modules', key: "id"}
+            },
             data: {
                 type: seq.JSONB,
                 fields: [{
@@ -24,11 +30,6 @@ module.exports.model = function (seq) {
         },
         afterDefine: function(Models){
             this.belongsTo(this, { as: 'Parent', foreignKey: 'parent'});
-            
-            this.metaData = { 
-                id: { caption: "ID", type: "int", readOnly: true},
-                name: { caption: "Nome do Módulo", type: "int", readOnly: false}
-            };
         }
     }
 }
