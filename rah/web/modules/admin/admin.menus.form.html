@@ -1,0 +1,56 @@
+<div ng-controller="MenusFormController">
+    <div class="row">
+        <rah-header title="Editar Menu" desc="Última alteração em 19/08/2016 ás 18:00hs"></rah-header>
+
+        <div class="col-xs-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.name" class="form-control"
+                                       placeholder="Nome">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.path" class="form-control"
+                                       placeholder="Caminho">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.parent" class="form-control"
+                                       placeholder="Pai">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.modules" class="form-control"
+                                       placeholder="Módulos">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.contexts" class="form-control"
+                                       placeholder="Contextos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="isNew ? create() : save()" class="btn btn-w-md btn-accent pull-right">
+                Salvar
+            </button>
+        </div>
+    </div>
+</div>
