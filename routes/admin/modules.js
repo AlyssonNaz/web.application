@@ -49,7 +49,7 @@ router.post('/new', auth.cookie, function (req, res, next) {
             desc: req.body.desc,
             data: req.body.data
         }).then(function (result) {
-            return res.json({ result });
+        return res.json({result: result});
         }, function (err) {
             return res.status(401).json(err);
         });

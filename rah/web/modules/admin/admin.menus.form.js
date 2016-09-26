@@ -29,6 +29,11 @@ define([
                     });
                 };
 
+                $scope.model = {
+                    modules: "[{'1'}]",
+                    contexts: "[{'d7f960c0-7e10-11e6-9280-b747f09f49fc'}]"
+                }
+
                 $scope.HeaderButtons = [
                     {
                         caption: 'Novo',

@@ -17,6 +17,7 @@
     "angular-route": "~1.2.14",
     "jquery": "~2.1.0",
     "requirejs": "~2.1.11",
-    "angular-route-segment": "^1.5.1"
+    "angular-route-segment": "^1.5.1",
+    "ngstorage": "^0.3.11"
   }
 }

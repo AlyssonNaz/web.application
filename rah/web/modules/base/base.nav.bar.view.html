@@ -2,12 +2,11 @@
     <aside class="navigation">
         <nav>
             <ul class="nav luna-nav" ng-repeat="menu in menus">
-
                 <li class="nav-category" >
                     {{menu.name}}
                 </li>
                 <li ng-repeat="submenu in menu.menus">
-                    <a href="{{submenu.link}}">{{submenu.name}}</a>
+                    <a href="{{submenu.path}}">{{submenu.name}}</a>
                 </li>
                 <!--<li>
                     <a href="/dashboard/report">Report</a>
