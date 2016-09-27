@@ -5,6 +5,7 @@ module.exports.model = function (seq) {
     return {
         columns: {
             name: {type: seq.STRING, unique: true, allowNull: false, caption: "Nome", readOnly: false},
+            rodrigo: {type: seq.STRING, unique: true, allowNull: false, caption: "Rodrigo", readOnly: false},
             code: {type: seq.UUID, unique: true, allowNull: false, caption: "Código", readOnly: false}
         },
         options: {

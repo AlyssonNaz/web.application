@@ -41,5 +41,5 @@ function create(db, modelName) {
 
 
 module.exports = {
-    create
+    create: create
 }

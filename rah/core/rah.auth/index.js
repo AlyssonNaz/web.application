@@ -49,7 +49,7 @@ module.exports = {
                 return res.status(500).json({success: false, message: 'HAHAHA... Onde está sua autorização? hein?'});
             } else {
                 // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
+                req.token = decoded;
                 next();
             }
         });

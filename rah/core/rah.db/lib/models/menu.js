@@ -18,10 +18,11 @@ module.exports.model = function (seq) {
                 type: seq.JSONB,
                 allownull: true,
                 fields: [{
-                    name: 'modules'
+                    name: 'modules',
+
                 },
                     {
-                        name: 'contexts'
+                        name: 'context'
                     }]
             },
         },
