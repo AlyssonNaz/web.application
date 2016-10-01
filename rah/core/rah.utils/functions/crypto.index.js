@@ -7,11 +7,11 @@ function encrypt(text) {
     var cipher = crypto.createCipheriv(algorithm, password, iv);
     var encrypted = cipher.update(text, 'utf8', 'base64');
     encrypted += cipher.final('base64');
-    return encodeTo64(encrypted);
+    return encrypted;
 }
 
 function decrypt(encrypted) {
-    encrypted = decodeFrom64(encrypted);
+    // encrypted = decodeFrom64(encrypted);
     var decipher = crypto.createDecipheriv(algorithm, password, iv);
     var dec = decipher.update(encrypted, 'base64', 'utf8');
     dec += decipher.final('utf8');

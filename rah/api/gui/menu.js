@@ -14,18 +14,16 @@ function organizeMenus(cachedMenus, menus) {
         var cache = cachedMenus[item.dataValues.data.context];
 
 
-        if (!item.dataValues.Parent && !cache[item.dataValues.id].menu) {
+        if (!item.dataValues.Parent && (!cache[item.dataValues.id] || !cache[item.dataValues.id].menu)) {
             cache[item.dataValues.id] = {menu: item};
-        } else {
-            if (item.dataValues.Parent) {
-                if (!cache[item.dataValues.Parent.id])
-                    cache[item.dataValues.Parent.id] = {
-                        menu: item.dataValues.Parent
-                    };
+        } else if (item.dataValues.Parent) {
+            if (!cache[item.dataValues.Parent.id])
+                cache[item.dataValues.Parent.id] = {
+                    menu: item.dataValues.Parent
+                };
 
-                if (!cache[item.dataValues.Parent.id].menus)
-                    cache[item.dataValues.Parent.id].menus = [];
-            }
+            if (!cache[item.dataValues.Parent.id].menus)
+                cache[item.dataValues.Parent.id].menus = [];
 
             cache[item.dataValues.Parent.id].menus.push(item);
         }
@@ -40,10 +38,11 @@ router.post('/', auth.req, function (req, res, next) {
     if (!menusCache)
         menusCache = {};
 
-    var contextCache = menusCache[req.token.context];
+    var contextCache = menusCache[req.token.rahSecure.context];
 
     if (contextCache) {
-        res.json({menus: menusCache});
+        res.json({menus: contextCache});
+
     } else {
         menu.findAll({include: [{model: db.model('menu'), as: 'Parent'}]}).then(function (menus) {
 
@@ -51,10 +50,11 @@ router.post('/', auth.req, function (req, res, next) {
 
             cache.set('gui.menus', menusCache);
 
-            res.json({menus: menusCache[req.token.context]});
+            res.json({menus: menusCache[req.token.rahSecure.context]});
 
         }).catch(function (err) {
-            res.status(404).json(err)
+            console.log(err)
+            res.status(500).json(err)
         });
     }
 });

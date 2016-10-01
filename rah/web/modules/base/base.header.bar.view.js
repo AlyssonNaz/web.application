@@ -2,6 +2,19 @@ define([
     'app'
 ], function(app)
 {
+    app.controller('rahHeaderBarViewController',
+        [
+            '$scope',
+            'auth',
+
+            function ($scope, auth) {
+                $scope.logout = function () {
+                    auth.logOut();
+                }
+
+            }
+        ]);
+
     app.directive('rahHeaderBarView', function ($compile, $route) {
         return {
             restrict: "E",

@@ -22,35 +22,51 @@ define([
                             })
                         }
 
-                        data.data.menus.map(function (item) {
-                            if (item.Parent && !findMenu(item.Parent.id).length) {
-                                $scope.menus.push({
-                                    id: item.Parent.id,
-                                    name: item.Parent.name,
-                                    path: item.Parent.path
-                                });
-                            }
+                        for (var context in data.data.menus) {
+                            var item = data.data.menus[context]
 
-                            if (!item.Parent) {
-                                if (!findMenu(item.id).length) {
-                                    $scope.menus.push({
-                                        id: item.id,
-                                        name: item.name,
-                                        path: item.path
-                                    });
-                                }
-                            }
-                            else {
-                                var i = $scope.menus.indexOf(findMenu(item.Parent.id)[0]);
-                                if (!$scope.menus[i].menus)
-                                    $scope.menus[i].menus = [];
-
-                                $scope.menus[i].menus.push({
-                                    name: item.name,
-                                    path: item.path
+                            $scope.menus.push({
+                                id: item.menu.id,
+                                name: item.menu.name,
+                                path: item.menu.path,
+                                menus: item.menus.map(function (submenu) {
+                                    return {
+                                        name: submenu.name,
+                                        path: submenu.path
+                                    }
                                 })
-                            }
-                        });
+                            });
+                        }
+
+                        // data.data.menus.map(function (item) {
+                        //     if (item.Parent && !findMenu(item.Parent.id).length) {
+                        //         $scope.menus.push({
+                        //             id: item.Parent.id,
+                        //             name: item.Parent.name,
+                        //             path: item.Parent.path
+                        //         });
+                        //     }
+                        //
+                        //     if (!item.Parent) {
+                        //         if (!findMenu(item.id).length) {
+                        //             $scope.menus.push({
+                        //                 id: item.id,
+                        //                 name: item.name,
+                        //                 path: item.path
+                        //             });
+                        //         }
+                        //     }
+                        //     else {
+                        //         var i = $scope.menus.indexOf(findMenu(item.Parent.id)[0]);
+                        //         if (!$scope.menus[i].menus)
+                        //             $scope.menus[i].menus = [];
+                        //
+                        //         $scope.menus[i].menus.push({
+                        //             name: item.name,
+                        //             path: item.path
+                        //         })
+                        //     }
+                        // });
 
                         $window.localStorage['gui.menus'] = JSON.stringify($scope.menus);
 

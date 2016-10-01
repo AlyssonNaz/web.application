@@ -12,7 +12,7 @@ module.exports.model = function (seq) {
             //nome de usuário
             username: {type: seq.STRING, unique: true, allowNull: false, caption: 'Usuário', readOnly: true},
             //salto da senha
-            passowrd_salt: { type: seq.STRING, allowNull: false, private: true },
+            passowrd_salt: {type: seq.STRING, allowNull: false, private: true},
             //módulo pai (se houver)
             context_id: {
                 type: seq.UUID,
@@ -27,7 +27,7 @@ module.exports.model = function (seq) {
                 allowNull: false,
                 private: true,
                 set: function (value) {
-                    if (!value) 
+                    if (!value)
                         throw 'Invalid password';
                     //cria salt para decodificar o hash do password        
                     var salt = crypto.randomBytes(16).toString('hex');
@@ -41,14 +41,14 @@ module.exports.model = function (seq) {
             //campo data (colunas dinâmicas)
             data: {
                 type: seq.JSONB,
-                allownull: true, 
-                fields: [{
-                    name: 'permissions'
-                }]
+                allownull: true,
+                fields: [
+                    {name: 'bar'},
+                    {name: 'role'}]
             },
         },
         options: {
-            tableName: 'tb_user', 
+            tableName: 'tb_user',
             timestamps: true,
             instanceMethods: {
                 //valida se uma senha fornecida bate com a senha do banco de dados

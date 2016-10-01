@@ -1,5 +1,5 @@
     <!-- Header-->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav ng-controller="rahHeaderBarViewController" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <div id="mobile-menu">
@@ -22,7 +22,7 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class=" profil-link">
-                        <a href="login.html">
+                        <a ng-click="logout()">
                             <span class="profile-address">alysosn.guimaraes@2bar.com.br</span>
                             <img src="/images/profile.jpg" class="img-circle" alt="">
                         </a>

@@ -2,7 +2,7 @@ define([], function()
 {
     var app = angular.module('app', ['ngRoute', 'route-segment', 'view-segment']);
 
-    return app.factory('auth', ['$http', '$window', function ($http, $window) {
+    return app.factory('auth', ['$http', '$window', '$location', function ($http, $window, $location) {
         var auth = {};
 
         auth.saveToken = function (token) {
@@ -17,7 +17,10 @@ define([], function()
 
         auth.logOut = function () {
             $window.localStorage.removeItem('x-access-token');
+            $window.localStorage.removeItem('gui.menus');
             $http.defaults.headers.common['x-access-token'] = '';
+            $location.path("/auth/login");
+
         };
 
         auth.isLoggedIn = function () {
