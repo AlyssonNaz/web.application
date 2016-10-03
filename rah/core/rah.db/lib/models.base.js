@@ -22,15 +22,23 @@ module.exports = function (model) {
     //cria hop para percorrer todas as colunas
     model.forEachColumns = function (callback) {
         for (var column in model.columns) {
-            //chama o método passado como parâmetro
-            callback(model.columns[column]);
+            var item = model.columns[column];
+            if (item.type.key == 'JSONB' && item.fields) {
+                for (var dataColumn in item.fields) {
+                    callback(item.fields[dataColumn], dataColumn, true);
+                }
+            }
+            else {
+                //chama o método passado como parâmetro
+                callback(item, column);
+            }
         }
     }
     
     //percorre as colunas dinâmincas para criar os métodos de get e set 
-    model.forEachColumns(function (column) {
-        //se a coluna for do tipo dinâmico deve percorrer o campo fields
-        if (column.type.key == 'JSONB' && column.fields) {
+    model.forEachColumns(function (column, columnName, isDataField) {
+        if (!isDataField) return;
+
             //se não houver métodos de get configurados inicia a variável
             if (!model.options.getterMethods)
                 model.options.getterMethods = {}
@@ -40,11 +48,8 @@ module.exports = function (model) {
                 model.options.setterMethods = {};
 
             //para cada campo dinâmico do modelo, cria um método de get e set
-            column.fields.forEach(function (field) {
-                model.options.getterMethods[field.name] = buildGetterMethod(field.name);
-                model.options.setterMethods[field.name] = buildSetterMethod(field.name);
-            });
-        }
+        model.options.getterMethods[columnName] = buildGetterMethod(columnName);
+        model.options.setterMethods[columnName] = buildSetterMethod(columnName);
     });
 
 }

@@ -42,9 +42,14 @@ module.exports.model = function (seq) {
             data: {
                 type: seq.JSONB,
                 allownull: true,
-                fields: [
-                    {name: 'bar'},
-                    {name: 'role'}]
+                fields: {
+                    role: {
+                        caption: 'Roles'
+                    },
+                    barContext: {
+                        caption: 'barId'
+                    }
+                }
             },
         },
         options: {
@@ -65,7 +70,9 @@ module.exports.model = function (seq) {
                     var data = {
                         id: this.id,
                         username: this.username,
-                        context: this.context_id
+                        context: this.context_id,
+                        barContext: this.barContext,
+                        role: this.role
                     }
 
                     var encryptedData = cryptoCore.encrypt(JSON.stringify(data));

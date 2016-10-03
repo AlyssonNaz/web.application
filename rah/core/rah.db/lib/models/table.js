@@ -4,8 +4,18 @@ var uuid = require('node-uuid');
 module.exports.model = function (seq) {
     return {
         columns: {
-            name: {type: seq.STRING, unique: true, allowNull: false, caption: "Nome", readOnly: false},
-            code: {type: seq.UUID, unique: true, allowNull: false, caption: "Código", readOnly: false}
+            name: {type: seq.STRING, unique: false, allowNull: false, caption: "Nome", readOnly: false},
+            code: {type: seq.UUID, unique: true, allowNull: false, caption: "Código", readOnly: false},
+            data: {
+                type: seq.JSONB,
+                allownull: true,
+                fields: {
+                    barContext: {
+                        caption: 'Contexto do Bar',
+                        rahBarContext: true
+                    }
+                }
+            }
         },
         options: {
             tableName: 'tb_table',

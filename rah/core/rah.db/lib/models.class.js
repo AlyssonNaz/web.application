@@ -31,6 +31,36 @@ module.exports = function (model) {
         return info;
     }
 
+    classMethods.filterContext = function (where, rahSecure) {
+        model.forEachColumns(function (column, columnName, isDataField) {
+            var fieldName = isDataField ? 'data.' + columnName : columnName;
+
+            if (column.rahContext)
+                where[fieldName] = rahSecure.context;
+            else if (column.rahBarContext)
+                where[fieldName] = rahSecure.barContext;
+        });
+    }
+
+    classMethods.setContext = function (newModel, rahSecure) {
+        model.forEachColumns(function (column, columnName, isDataField) {
+            if (isDataField) {
+                if (!newModel['data'])
+                    newModel['data'] = {};
+
+                if (column.rahContext)
+                    newModel['data'][columnName] = rahSecure.context;
+                else if (column.rahBarContext)
+                    newModel['data'][columnName] = rahSecure.barContext;
+            }
+            else {
+                if (column.rahContext)
+                    newModel[columnName] = rahSecure.context;
+                else if (column.rahBarContext)
+                    newModel[columnName] = rahSecure.barContext;
+            }
+        });
+    }
 
     classMethods.publicFields = function () {
         var result = [];
