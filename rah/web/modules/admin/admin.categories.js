@@ -3,19 +3,19 @@ define([
     '../base/table/table.view',
     '../base/header/header.view'
 ], function (app) {
-    app.controller('TablesController',
+    app.controller('CategoriesController',
         [
             '$scope',
             '$http',
-            function ($scope, $http) {
+            function ($scope) {
 
                 $scope.headerOptions = {
-                    title: 'Mesas',
-                    description: 'Lista de mesas do bar.',
+                    title: 'Categorias',
+                    description: 'Lista de categorias dos produtos.',
                     buttons: [
                         {
                             caption: 'Novo',
-                            link: '/bar/tables/new'
+                            link: '/admin/categories/new'
                         }
                     ]
                 };

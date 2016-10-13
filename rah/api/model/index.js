@@ -59,8 +59,11 @@ router.post('/:model/:id', auth.req, function (req, res, next) {
     //adiciona por padrão a clausula de where
     options.where.id = req.params.id;
 
-    TModel.findOne(options).then(function (items) {
-        res.json(items);
+    TModel.findOne(options).then(function (item) {
+        if (!item)
+            res.status(404).json(item);
+        else
+            res.json(item);
     }).catch(function (err) {
         res.status(404).json(err)
     });

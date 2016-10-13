@@ -1,0 +1,43 @@
+<div ng-controller="ProductsFormController">
+    <div class="row">
+        <rah-header></rah-header>
+
+        <div class="col-xs-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" ng-model="model.data.name" class="form-control"
+                                       placeholder="Nome do Produto">
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input type="text" ng-model="model.data.description" class="form-control"
+                                       placeholder="Descrição do Produto">
+                            </div>
+                            <div class="form-group">
+                                <label>Valor</label>
+                                <input type="text" ng-model="model.data.value" class="form-control"
+                                       placeholder="Valor do Produto">
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <input type="text" ng-model="model.data.categoryId" class="form-control"
+                                       placeholder="Categoria do Produto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="saveOrCreate()" class="btn btn-w-md btn-accent pull-right">
+                Salvar
+            </button>
+        </div>
+    </div>
+</div>

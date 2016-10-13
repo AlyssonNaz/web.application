@@ -3,7 +3,7 @@ define([
     '../base/table/table.view',
     '../base/header/header.view'
 ], function (app) {
-    app.controller('TablesFormController',
+    app.controller('CategoriesFormController',
         [
             '$scope',
             '$http',
@@ -14,17 +14,13 @@ define([
                 $scope.isNew = $route.current.params.id == 'new';
 
                 if (!$scope.isNew) {
-                    form.get('table').then(function (data) {
-                        $scope.model = data.data
-
-                        $http.post('/api/bar/table/qr-code/' + data.data.code).then(function (data) {
-                            $('<div style="background: white;"></div>').append($(data.data).attr('width', '100px')).appendTo('#qr-code');
-                        });
+                    form.get('category').then(function (category) {
+                        $scope.model = category.data;
                     });
                 }
 
                 $scope.saveOrCreate = function () {
-                    form.saveOrCreate('table', $scope.model, $route.current.params.id);
+                    form.saveOrCreate('category', $scope.model, $route.current.params.id);
                 };
 
 

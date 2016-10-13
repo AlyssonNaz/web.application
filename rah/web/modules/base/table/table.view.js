@@ -2,7 +2,7 @@ define([
     'app'
 ], function(app)
 {
-    app.directive('rahTable', function ($compile, $route, $http) {
+    app.directive('rahTable', function ($compile, $route, $http, $location) {
         return {
             restrict: "E",
             replace: true,
@@ -32,7 +32,7 @@ define([
                             $tr.append('<td>'+ data.itens[i][column] +'</td>');
                         }
 
-                        $tr.append('<td class="text-center"><a href="/admin/'+$scope.model+'s/'+data.itens[i]['id']+'" class="btn btn-default btn-xs">Abrir</a></td>')
+                        $tr.append('<td class="text-center"><a href="' + $location.path() + '/' + data.itens[i]['id'] + '" class="btn btn-default btn-xs">Abrir</a></td>')
                         $tbody.append($tr);
                     }
 

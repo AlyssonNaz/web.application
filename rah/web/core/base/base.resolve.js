@@ -27,6 +27,7 @@ define([], function () {
                             '/modules/base/base.view.js',
                             '/modules/base/base.header.bar.view.js',
                             '/modules/base/base.nav.bar.view.js',
+                            '/core/model/core.model.js',
                             resolve()], function () {
                             $rootScope.$apply(function () {
                                 deferred.resolve();

@@ -1,6 +1,6 @@
-<div ng-controller="TablesFormController">
+<div ng-controller="CategoriesFormController">
     <div class="row">
-        <rah-header title="Editar Bar" desc="Última alteração em 19/08/2016 ás 18:00hs"></rah-header>
+        <rah-header></rah-header>
 
         <div class="col-xs-12">
             <div class="panel panel-filled">
@@ -9,21 +9,19 @@
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" ng-model="model.name" class="form-control"
-                                       placeholder="Nome da mesa">
+                                <input type="text" ng-model="model.data.name" class="form-control"
+                                       placeholder="Nome da Categoria">
                             </div>
-                        </div>
-
-
-                        <div ng-if="!isNew" id="qr-code" class="col-xs-12">
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input type="text" ng-model="model.data.description" class="form-control"
+                                       placeholder="Descrição da Categoria">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     </div>
     <div class="row">
         <div class="col-xs-12">
